@@ -5,12 +5,8 @@ export default class Images extends Component {
     super(props);
     this.state = {
       imgPath: '',
-      flag: false,
+      result: false,
     };
-  }
-
-  componentDidMount() {
-    this.fetchDogCeo();
   }
 
   async fetchDogCeo() {
@@ -19,19 +15,22 @@ export default class Images extends Component {
     // console.log(executeApi.message);
     this.setState({
       imgPath: executeApi.message,
-      flag: true,
+      result: true,
     });
   }
 
   render() {
-    const { imgPath, flag } = this.state;
+    const { imgPath, result } = this.state;
     return (
       <div>
         <h1>
           My dog random is:
           <main>
-            { (flag) ? <img src={ imgPath } alt="foto" /> : <h3>Loading...</h3> }
+            { (result) ? <img src={ imgPath } alt="foto" /> : <span>Loading...</span> }
           </main>
+          <button type="button" onClick={ () => this.fetchDogCeo() }>
+            Next Dog
+          </button>
         </h1>
       </div>
     );
